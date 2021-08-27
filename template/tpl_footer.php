@@ -21,6 +21,19 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.1.0/js/adminlte.min.js" integrity="sha512-AJUWwfMxFuQLv1iPZOTZX0N/jTCIrLxyZjTRKQostNU71MzZTEPHjajSK20Kj1TwJELpP7gl+ShXw5brpnKwEg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<!-- Bootstrap 4 -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js" integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script type="text/javascript">
+		/** add active class and stay opened when selected */
+		var url = window.location;
 
+		// for sidebar menu entirely but not cover treeview
+		$('.sidebar ul.nav-sidebar a').filter(function() {
+			return this.href == url && !this.href.includes("#");
+		}).addClass('active');
+
+		// for treeview
+		$('.sidebar ul.nav-treeview a').filter(function() {
+			return this.href == url && !this.href.includes("#");
+		}).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
+	</script>	
 </body>
 </html>

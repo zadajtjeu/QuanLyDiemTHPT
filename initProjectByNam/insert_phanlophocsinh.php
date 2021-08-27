@@ -46,8 +46,7 @@ for ($i=1; $i <= 14; $i++) {
 // Insert khối 10 năm 2019-2020
 // HK 1
 $hk = 1;
-$student10 = $student;
-$student = $student10;
+$student = 631;
 for ($i=15; $i <= 28; $i++) { 
     for ($j=1; $j <= 45; $j++) { 
         $sql = 'INSERT INTO `phan_lop_hocsinh`(`maHS`, `maLop`, `maHK`) VALUES ('.$student.','.$i.','.$hk.')';
@@ -57,7 +56,7 @@ for ($i=15; $i <= 28; $i++) {
 }
 // HK 2
 $hk = 2;
-$student = $student10;
+$student = 631;
 for ($i=15; $i <= 28; $i++) { 
     for ($j=1; $j <= 45; $j++) { 
         $sql = 'INSERT INTO `phan_lop_hocsinh`(`maHS`, `maLop`, `maHK`) VALUES ('.$student.','.$i.','.$hk.')';
@@ -93,8 +92,8 @@ for ($i=29; $i <= 42; $i++) {
 // Insert khối 10 năm 2020-2021
 // HK 1
 $hk = 1;
-$student20 = $student10;
-$studentx = $student20;
+
+$studentx = 1261;
 for ($i=43; $i <= 56; $i++) { 
     for ($j=1; $j <= 45; $j++) { 
         $sql = 'INSERT INTO `phan_lop_hocsinh`(`maHS`, `maLop`, `maHK`) VALUES ('.$studentx.','.$i.','.$hk.')';
@@ -104,7 +103,7 @@ for ($i=43; $i <= 56; $i++) {
 }
 // HK 2
 $hk = 2;
-$studentx = $student10;
+$studentx = 1261;
 for ($i=43; $i <= 56; $i++) { 
     for ($j=1; $j <= 45; $j++) { 
         $sql = 'INSERT INTO `phan_lop_hocsinh`(`maHS`, `maLop`, `maHK`) VALUES ('.$studentx.','.$i.','.$hk.')';
@@ -116,8 +115,7 @@ for ($i=43; $i <= 56; $i++) {
 // Insert khối 11 năm 2020-2021
 // HK 1
 $hk = 1;
-$student20 = $student;
-$studentx = $student;
+$studentx = 631;
 for ($i=57; $i <= 70; $i++) { 
     for ($j=1; $j <= 45; $j++) { 
         $sql = 'INSERT INTO `phan_lop_hocsinh`(`maHS`, `maLop`, `maHK`) VALUES ('.$studentx.','.$i.','.$hk.')';
@@ -127,7 +125,7 @@ for ($i=57; $i <= 70; $i++) {
 }
 // HK 2
 $hk = 2;
-$studentx = $student;
+$studentx = 631;
 for ($i=57; $i <= 70; $i++) { 
     for ($j=1; $j <= 45; $j++) { 
         $sql = 'INSERT INTO `phan_lop_hocsinh`(`maHS`, `maLop`, `maHK`) VALUES ('.$studentx.','.$i.','.$hk.')';
@@ -148,7 +146,7 @@ for ($i=71; $i <= 84; $i++) {
 }
 // HK 2
 $hk = 2;
-$studentx = $student;
+$studentx = 1;
 for ($i=71; $i <= 84; $i++) { 
     for ($j=1; $j <= 45; $j++) { 
         $sql = 'INSERT INTO `phan_lop_hocsinh`(`maHS`, `maLop`, `maHK`) VALUES ('.$studentx.','.$i.','.$hk.')';

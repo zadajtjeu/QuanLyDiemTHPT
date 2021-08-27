@@ -56,7 +56,7 @@ $listaddress = array("Ba Đình",
 for ($i=2000; $i <= 2050; $i++) { 
 	// tách
 	$name_gender = explode(',', $nameData[$i]);
-	$name = ucwords(trim($name_gender[0]));
+	$name = my_ucwords(trim($name_gender[0]));
 	$date = rand(1970, 1990).'-'.rand(1, 12).'-'.rand(1, 28);
 	$gender = trim($name_gender[1]) == "f"? 1:0;
 
@@ -67,4 +67,53 @@ for ($i=2000; $i <= 2050; $i++) {
 	echo $sql."\n";
 	$mysqli->query($sql);
 
+}
+
+
+
+function my_ucwords($str)
+{
+	mb_internal_encoding('UTF-8');
+	$string = $str;
+	return ucwords_specific( mb_strtolower($string, 'UTF-8'), "-'");
+}
+
+function ucwords_specific ($string, $delimiters = '', $encoding = NULL)
+{
+	if ($encoding === NULL) { $encoding = mb_internal_encoding();}
+
+	if (is_string($delimiters))
+	{
+		$delimiters = str_split( str_replace(' ', '', $delimiters));
+	}
+
+	$delimiters_pattern1 = array();
+	$delimiters_replace1 = array();
+	$delimiters_pattern2 = array();
+	$delimiters_replace2 = array();
+	foreach ($delimiters as $delimiter)
+	{
+		$uniqid = uniqid();
+		$delimiters_pattern1[] = '/'. preg_quote($delimiter) .'/';
+		$delimiters_replace1[] = $delimiter.$uniqid.' ';
+		$delimiters_pattern2[] = '/'. preg_quote($delimiter.$uniqid.' ') .'/';
+		$delimiters_replace2[] = $delimiter;
+	}
+
+// $return_string = mb_strtolower($string, $encoding);
+	$return_string = $string;
+	$return_string = preg_replace($delimiters_pattern1, $delimiters_replace1, $return_string);
+
+	$words = explode(' ', $return_string);
+
+	foreach ($words as $index => $word)
+	{
+		$words[$index] = mb_strtoupper(mb_substr($word, 0, 1, $encoding), $encoding).mb_substr($word, 1, mb_strlen($word, $encoding), $encoding);
+	}
+
+	$return_string = implode(' ', $words);
+
+	$return_string = preg_replace($delimiters_pattern2, $delimiters_replace2, $return_string);
+
+	return $return_string;
 }

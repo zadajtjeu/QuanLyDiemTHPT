@@ -227,12 +227,27 @@ else {
 						</li>
 						<?php endif; ?>
 						<li class="nav-item">
-							<a href="/dieu-khoan.html" class="nav-link">
+							<a href="#" class="nav-link">
 								<i class="nav-icon fas fa-search"></i>
 								<p>
 									Tra cứu
+									<i class="fas fa-angle-left right"></i>
 								</p>
 							</a>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="/tracuu/lophoc.php" class="nav-link">
+										<i class="fas fa-chevron-right nav-icon"></i>
+										<p>Tra cứu lớp học</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="/tracuu/diem.php" class="nav-link">
+										<i class="fas fa-chevron-right nav-icon"></i>
+										<p>Tra cứu điểm</p>
+									</a>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</nav>
