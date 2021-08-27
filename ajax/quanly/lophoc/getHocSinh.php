@@ -16,17 +16,16 @@ if((empty($_SESSION['username']) && empty($_SESSION['password']))) {
 	    "iTotalDisplayRecords" => 0,
 	    "aaData" => []
 	];
-	echo 1;
 }
 else {
 	
-	$maLop = empty($_GET['maLop']) ? null : htmlspecialchars($_GET['maLop']);
-	$maHK = empty($_GET['maHK']) ? null : htmlspecialchars($_GET['maHK']);
+	// Xem phân quyền c
+	$taikhoan = array();
+	$result = $mysqli->query('SELECT * FROM `taikhoan` WHERE `username`=\''.htmlspecialchars($_SESSION['username']).'\' AND `password`=\''.htmlspecialchars($_SESSION['password']).'\';');
 
-	if (!empty($maLop) && !empty($maHK)) {
-		$queryLop = $mysqli->query('SELECT `maLop` FROM `lop` WHERE `maLop` = '.$maLop.'');
-		$queryHK = $mysqli->query('SELECT `maHK` FROM `hocky` WHERE `maHK` = '.$maHK.'');
-		if ($queryHK->num_rows > 0 && $queryLop->num_rows > 0) {
+	if ($result->num_rows > 0) {
+		$taikhoan = $result->fetch_array(MYSQLI_ASSOC);
+		if (in_array($taikhoan['role'], array('admin', 'manager'))) {
 
 			$draw = empty($_POST['draw']) ? '' : htmlspecialchars($_POST['draw']);  
 			$row = empty($_POST['start']) ? 0 : htmlspecialchars($_POST['start']); 
@@ -34,18 +33,17 @@ else {
 
 			##SortOrder 
 			$columnIndex = empty($_POST['order'][0]['column']) ? 0 : htmlspecialchars($_POST['order'][0]['column']); // Column index
-			$columnName =  '`hocsinh`.`maHS`'; // Column name
+			$columnName =  'maHS'; // Column name
 			if (is_array($_POST['columns'][$columnIndex]['data'])) {
-				$columnName = empty($_POST['columns'][$columnIndex]['data']['sort']) ? '`hocsinh`.`maHS`' : htmlspecialchars($_POST['columns'][$columnIndex]['data']['sort']);
+				$columnName = empty($_POST['columns'][$columnIndex]['data']['sort']) ? 'maHS' : htmlspecialchars($_POST['columns'][$columnIndex]['data']['sort']);
 			} else {
-				$columnName = empty($_POST['columns'][$columnIndex]['data']) ? '`hocsinh`.`maHS`' : htmlspecialchars($_POST['columns'][$columnIndex]['data']);
+				$columnName = empty($_POST['columns'][$columnIndex]['data']) ? 'maHS' : htmlspecialchars($_POST['columns'][$columnIndex]['data']);
 			}
 			$columnSortOrder = empty($_POST['order'][0]['dir']) ? 'asc' : htmlspecialchars($_POST['order'][0]['dir']); // asc or desc
 			 
 			## Search 
-			$TimKiem = ' WHERE `phan_lop_hocsinh`.`maLop` = '.$maLop.' AND `phan_lop_hocsinh`.`maHK` = '.$maHK.' ';
-			$searchQuery = ' ';
 			$searchValue = empty($_POST['search']['value']) ? '' : htmlspecialchars($_POST['search']['value']); // Search value
+			$searchQuery = " ";
 			if($searchValue != ''){
 			   $searchQuery .= " AND (`tenHS` like '%".$searchValue."%' OR
 			            `noiSinh` LIKE '%".$searchValue."%' OR `ngaySinh` LIKE '%".$searchValue."%') ";
@@ -62,17 +60,17 @@ else {
 			}
 			
 			## Total number of records without filtering
-			$sel = $mysqli->query("SELECT count(*) AS `allcount` FROM `phan_lop_hocsinh`".$TimKiem);
+			$sel = $mysqli->query("SELECT count(*) AS `allcount` FROM `hocsinh`");
 			$records = $sel->fetch_array(MYSQLI_ASSOC);
 			$totalRecords = $records['allcount'];
+			 
 			## Total number of records with filtering
-			$sel = $mysqli->query("SELECT count(*) AS `allcount` FROM `phan_lop_hocsinh` INNER JOIN `lop` ON `lop`.`maLop` = `phan_lop_hocsinh`.`maLop` INNER JOIN `hocsinh` ON `hocsinh`.`maHS` = `phan_lop_hocsinh`.`maHS` INNER JOIN `hocky` ON `hocky`.`maHK` = `phan_lop_hocsinh`.`maHK`".$TimKiem.$searchQuery);
-			
+			$sel = $mysqli->query("SELECT count(*) AS `allcount` FROM `hocsinh` WHERE 1 ".$searchQuery);
 			$records = $sel->fetch_array(MYSQLI_ASSOC);
 			$totalRecordwithFilter = $records['allcount'];
 			 
 			## Fetch records
-			$empQuery = "SELECT * FROM `phan_lop_hocsinh` INNER JOIN `lop` ON `lop`.`maLop` = `phan_lop_hocsinh`.`maLop` INNER JOIN `hocsinh` ON `hocsinh`.`maHS` = `phan_lop_hocsinh`.`maHS` INNER JOIN `hocky` ON `hocky`.`maHK` = `phan_lop_hocsinh`.`maHK`".$TimKiem.$searchQuery." ORDER BY ".$columnName." ".$columnSortOrder." LIMIT ".$row.",".$rowperpage;
+			$empQuery = "SELECT * FROM `hocsinh` WHERE 1 ".$searchQuery." ORDER BY ".$columnName." ".$columnSortOrder." LIMIT ".$row.",".$rowperpage;
 			//echo $empQuery;
 			$empRecords = $mysqli->query($empQuery);
 			 
@@ -80,14 +78,12 @@ else {
 			 
 			while($row = $empRecords->fetch_array(MYSQLI_ASSOC)){
 			    $data[] = array(
-			    	'phan_lop_hocsinh' => array( 'id' => $row['id']),
-			    	'hocsinh' => array(
 			    		'maHS' => $row['maHS'],
 			    		'tenHS' => $row['tenHS'],
 			    		'ngaySinh' => $row['ngaySinh'],
 			    		'gioiTinh' => $row['gioiTinh'],
 			    		'noiSinh' => $row['noiSinh']
-			    		)
+
 			        );
 			}
 			 

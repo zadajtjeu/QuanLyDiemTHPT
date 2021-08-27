@@ -40,7 +40,7 @@ require './../template/tpl_header.php';
 						<i class="nav-icon fas fa-calendar-alt"></i>
 						Danh sách lớp học
 					</h3>
-					<button type="button" class="btn btn-default btn-sm float-right p-0" onclick="$('#ModalAdd').modal({show: true});"><i class="fas fa-plus-circle"></i> Thêm mới</button>
+					<button type="button" class="btn btn-default btn-xs float-right" onclick="$('#ModalAdd').modal({show: true});"><i class="fas fa-plus-circle"></i> Thêm mới</button>
 				</div>
 				<div class="card-body">
 					<table class="table table-striped projects" id="LopHocTable" width="100%">
@@ -229,10 +229,10 @@ require './../template/tpl_header.php';
 		});
 
 		var listDataTable = $('#LopHocTable').DataTable({
-			'processing': true,
-			'serverSide': true,
-			'serverMethod': 'post',
-			'ajax': {
+			processing: true,
+			serverSide: true,
+			serverMethod: 'post',
+			ajax: {
 				'url':'/ajax/quanly/lophoc/getLopHoc.php'
 			},
 			pageLength: 50,
@@ -245,7 +245,7 @@ require './../template/tpl_header.php';
 				{ 
 					data: 'tenLop',
 					fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-           			 $(nTd).html("<a href='/tracuu/lophoc.php?maLop="+oData.maLop+"'>"+oData.tenLop+"</a>");
+           			 $(nTd).html("<a href='/quanly/hocsinhtronglop.php?maLop="+oData.maLop+"'>"+oData.tenLop+"</a>");
         			}
     			},
 				{ data: {
@@ -264,6 +264,7 @@ require './../template/tpl_header.php';
 					defaultContent: "<a class=\"btn btn-danger btn-sm float-right deleteable\" href=\"#\"><i class=\"fas fa-trash\"></i>Xoá</a> \n <a class=\"btn btn-info btn-sm float-right editable\" href=\"#\"><i class=\"fas fa-pencil-alt\"></i>Sửa</a>"
 				}
 			],
+			order: [[ 3, "desc" ]],
 			language: {
 				url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Vietnamese.json'
 			},

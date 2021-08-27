@@ -18,6 +18,7 @@ if (!empty($_GET['maLop'])) {
 <?php if(!empty($maLop) && isset($queryLop->num_rows) && $queryLop->num_rows > 0  &&
 in_array($taikhoan['role'], array('admin', 'manager'))) : ?>
 
+<style>.toasts-top-right { z-index: 1060!important; }</style>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap4.min.css" integrity="sha512-PT0RvABaDhDQugEbpNMwgYBCnGCiTZMh9yOzUsJHDgl/dMhD9yjHAwoumnUk3JydV3QTcIkNDuN40CJxik5+WQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-buttons-bs4/2.0.0/buttons.bootstrap4.min.css" integrity="sha512-hzvGZ3Tzqtdzskup1j2g/yc+vOTahFsuXp6X6E7xEel55qInqFQ6RzR+OzUc5SQ9UjdARmEP0g2LDcXA5x6jVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -61,7 +62,11 @@ in_array($taikhoan['role'], array('admin', 'manager'))) : ?>
 							<td><?php echo $classInfo['tenKhoiLop']; ?></td>
 						</tr>
 						<tr>
-							<th>Chủ nhiệm</th>
+							<th>Năm học</th>
+							<td><?php echo $classInfo['namHoc']; ?></td>
+						</tr>
+						<tr>
+							<th>Chủ nhiệm <a class="btn btn-info btn-sm" href="#" onclick="DoiChuNhiem()"><i class="fas fa-user-edit"></i>Thay đổi</a></th>
 							<td><?php echo $classInfo['tenGV']; ?></td>
 						</tr>
 					</table>
@@ -72,6 +77,7 @@ in_array($taikhoan['role'], array('admin', 'manager'))) : ?>
 					<ul class="nav nav-tabs" id="HocKyTab" role="tablist">
 
 					</ul>
+					<button type="button" class="btn btn-warning btn-flat float-right" onclick="AddHocSinh()"><i class="fas fa-plus-circle"></i> Thêm mới</button>
 				</div>
 				<div class="card-body">
 					<div class="tab-content" id="HocKyTabContent">
@@ -98,6 +104,116 @@ in_array($taikhoan['role'], array('admin', 'manager'))) : ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.0.0/js/buttons.html5.min.js" integrity="sha512-33SxAOPhjjpLMmMGKqLwH2QNDmdxf038OFOq+fOI8p8ghCiOvfv3Bs2wqoj50USQkWBLpvy7+CzT5AHTZWGoNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
+
+<!-- MODAL Thêm học sinh vô lớp -->
+
+<div id="AddHocSinhModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel2" aria-hidden="true">
+	<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-info">
+				<strong>Thêm học sinh vào lớp </strong></span>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+			</div>
+			<div class="modal-body">
+				<form id="AddHocSinhForm" action="#" method="post">
+					<input type="hidden" name="maLop" value="<?php echo $classInfo['maLop']; ?>" required />
+					<div class="row">
+						<div class="col-xl-8">
+							<table class="table table-bordered table-striped" id="DanhSachHocSinh" width="100%">
+								<thead>
+									<tr>
+										<th width="1%">Mã</th>
+										<th>Tên học sinh</th>
+										<th>Ngày sinh</th>
+										<th>Giới tính</th>
+										<th>Nơi sinh</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+						<div class="col-xl-4">
+							<div class="form-group">
+								<label for="maHS">Chọn học sinh</label>
+								<select name="maHS" id="maHS" class="form-control" required>
+								</select>
+								<small class="form-text text-muted text-alert">* Chọn từ danh sách bên cạnh</small>
+							</div>
+							<div class="form-group">
+								<label for="maHK">Chọn học kỳ</label>
+								<select name="maHK" id="maHK" class="form-control" required>
+								</select>
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-info float-right" id="AddHocSinhSubmit">Lưu thông tin</button>
+							</div>
+						</div>
+					</div>
+					
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- MODAL CHO Chuyển lớp -->
+
+<div id="ModalTransferClass" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel2" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-info">
+				<strong>Chuyển lớp </strong></span>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+			</div>
+			<div class="modal-body">
+				<form id="TransferClassForm" action="#" method="post">
+					<input type="hidden" name="id" id="id" value="" required />
+					<!-- select -->
+					<div class="form-group">
+						<label for="maLop">Lớp</label>
+						<select name="maLop" id="maLop" class="form-control" required>
+						</select>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-info float-right" id="TranferClassEditSubmit">Lưu thông tin</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- MODAL Sua Giao Vien chu nhiem -->
+
+<div id="EditTeacherClass" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel2" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-info">
+				<strong>Chuyển lớp </strong></span>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+			</div>
+			<div class="modal-body">
+				<form id="EditTeacherForm" action="#" method="post">
+					<input type="hidden" name="maLop" value="<?php echo $classInfo['maLop']; ?>" required/>
+					<!-- select -->
+					<div class="form-group">
+						<label for="maGV">Chọn giáo viên mới</label>
+						<select name="maGV" id="maGV" class="form-control" required></select>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-info float-right" id="EditTeacherSubmit">Lưu thông tin</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script>
 	$(document).ready(function(){
 		$.ajax({
@@ -111,30 +227,211 @@ in_array($taikhoan['role'], array('admin', 'manager'))) : ?>
 					}
 					$('#HocKyTab').append( '<li class="nav-item"> <a class="nav-link'+active+'" id="tab'+index+'_data-tab" data-toggle="pill" href="#tab'+index+'_data" role="tab" aria-controls="tab'+index+'_data" aria-selected="'+selected+'">'+row.tenHK+'</a> </li>' );
 					$('#HocKyTabContent').append('<div id="tab'+index+'_data" class="tab-pane cont'+active+'"> <table class="table table-bordered table-striped" id="LopHocTable'+index+'" width="100%">'+$('#HocSinhTemplate').html()+'</table></div>');
-					var listDataTable = FillTableLopHoc(index,<?php echo $maLop; ?>, row.maHK);
-
-					$('#LopHocTable'+index+' tbody').on( 'click', '.editable', function () {
-						var data = listDataTable[index].row($(this).parents('tr') ).data();
-						if(data) {
-							console.log(data);
-						} else {
-							$(document).Toasts('create', {
-								class: 'bg-danger',
-								title: 'Có lỗi xảy ra!',
-								body: 'Không tìm thấy dữ liệu'
-							});
-						}
-					});
+					FillTableLopHoc(index,<?php echo $maLop; ?>, row.maHK);
 				});
 			}
 		});
 
-		
+		// Submit form thêm lớp
+		$("#AddHocSinhForm").submit(function (event) {
+			event.preventDefault();
+			$("#AddHocSinhSubmit").attr("disabled", true).html('<i class="fas fa-spinner fa-spin"></i> Lưu thông tin');
+			var form = $(this);
+			var Data = form.serialize();
+			$.ajax({
+				url: '/ajax/quanly/lophoc/themHocSinhvaoLop.php',
+				type: 'POST',
+				data: Data,
+				success: function (result) {
+					if (result.success) {
+						$(document).Toasts('create', {
+							class: 'bg-success',
+							title: 'Thành công!',
+							body: result.success
+						});
+						setTimeout(function(){
+							window.location.reload();
+						}, 2000);
+					}
+					else {
+						$.each(result.error, function(id,errorMessage) {
+							$(document).Toasts('create', {
+								class: 'bg-danger',
+								title: 'Có lỗi xảy ra!',
+								body: errorMessage
+							});
+						});
+
+						$("#AddHocSinhSubmit").attr("disabled", false).html('Lưu thông tin');
+					}
+
+				},
+				error: function (xhr, status, error) {
+					alert(error);
+					$("#AddHocSinhSubmit").attr("disabled", false).html('Lưu thông tin');
+				}
+			});
+			return false;
+		});
+
+		// Submit form chuyển lớp
+		$("#TransferClassForm").submit(function (event) {
+			event.preventDefault();
+			$("#TranferClassEditSubmit").attr("disabled", true).html('<i class="fas fa-spinner fa-spin"></i> Lưu thông tin');
+			var form = $(this);
+			var Data = form.serialize();
+			$.ajax({
+				url: '/ajax/quanly/lophoc/chuyenLop.php',
+				type: 'POST',
+				data: Data,
+				success: function (result) {
+					if (result.success) {
+						$(document).Toasts('create', {
+							class: 'bg-success',
+							title: 'Thành công!',
+							body: result.success
+						});
+						setTimeout(function(){
+							window.location.reload();
+						}, 2000);
+					}
+					else {
+						$.each(result.error, function(id,errorMessage) {
+							$(document).Toasts('create', {
+								class: 'bg-danger',
+								title: 'Có lỗi xảy ra!',
+								body: errorMessage
+							});
+						});
+
+						$("#TranferClassEditSubmit").attr("disabled", false).html('Lưu thông tin');
+					}
+
+				},
+				error: function (xhr, status, error) {
+					alert(error);
+					$("#TranferClassEditSubmit").attr("disabled", false).html('Lưu thông tin');
+				}
+			});
+			return false;
+		});
+
+
+		// Submit form đổi chủ nhiệm
+		$("#EditTeacherForm").submit(function (event) {
+			event.preventDefault();
+			$("#EditTeacherSubmit").attr("disabled", true).html('<i class="fas fa-spinner fa-spin"></i> Lưu thông tin');
+			var form = $(this);
+			var Data = form.serialize();
+			$.ajax({
+				url: '/ajax/quanly/lophoc/doiChuNhiem.php',
+				type: 'POST',
+				data: Data,
+				success: function (result) {
+					if (result.success) {
+						$(document).Toasts('create', {
+							class: 'bg-success',
+							title: 'Thành công!',
+							body: result.success
+						});
+						setTimeout(function(){
+							window.location.reload();
+						}, 2000);
+					}
+					else {
+						$.each(result.error, function(id,errorMessage) {
+							$(document).Toasts('create', {
+								class: 'bg-danger',
+								title: 'Có lỗi xảy ra!',
+								body: errorMessage
+							});
+						});
+
+						$("#EditTeacherSubmit").attr("disabled", false).html('Lưu thông tin');
+					}
+
+				},
+				error: function (xhr, status, error) {
+					alert(error);
+					$("#EditTeacherSubmit").attr("disabled", false).html('Lưu thông tin');
+				}
+			});
+			return false;
+		});
+
 
 	});
 
+
+
+	// Hiện model thêm HS vô lớp
+	function AddHocSinh() {
+
+		$("#AddHocSinhModal").modal({show: true});
+		$('#DanhSachHocSinh').DataTable().destroy();
+		var dataTableHS = $('#DanhSachHocSinh').DataTable({
+			'processing': true,
+			'serverSide': true,
+			'serverMethod': 'post',
+			'ajax': {
+				'url':'/ajax/quanly/lophoc/getHocSinh.php'
+			},
+			pageLength: 10,
+			'columns': [
+				{ data: 'maHS', searchable : false },
+				{ data: 'tenHS'},
+				{ data: 'ngaySinh'},
+				{ 
+					data: 'gioiTinh',
+					render: function ( data, type, row ) {
+						return data==0?'Nam':'Nữ';
+			        }
+			    },
+				{ data: 'noiSinh'}
+			],
+			language: {
+				url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Vietnamese.json'
+			}
+
+		});
+
+		$('#DanhSachHocSinh tbody').on( 'click', 'tr', function () {
+		    console.log( dataTableHS.row( this ).data() );
+		    var hocsinh = dataTableHS.row( this ).data();
+		    $('#maHS').html('<option value="'+hocsinh.maHS+'">'+hocsinh.tenHS+'</option>');
+		});
+		$.ajax({
+			url: '/ajax/quanly/lophoc/getHocKy.php',
+			success: function (data) {
+				$('#maHK').html('');
+				$.each(data, function (index,  row) {
+					$('#maHK').append( '<option value="'+row.maHK+'">'+row.tenHK+'</option>' );
+				});
+			}
+		});
+
+
+	}
+
+	// Hiện model sửa chủ nhiệm
+	function DoiChuNhiem() {
+		$.ajax({
+			url: '/ajax/quanly/lophoc/getInfo.php',
+			success: function (data) {
+				$('#maGV').html('');
+				$.each(data[4], function (index,  row) {
+					$('#maGV').append( '<option value="'+row.id+'">'+row.value+'</option>' );
+				});
+			}
+		});
+		$("#EditTeacherClass").modal({show: true});
+
+	}
+
+
+
 	function FillTableLopHoc(tableindex, maLop, maHK) {
-		return $('#LopHocTable'+tableindex).DataTable({
+		var dataTable = $('#LopHocTable'+tableindex).DataTable({
 			'processing': true,
 			'serverSide': true,
 			'serverMethod': 'post',
@@ -158,7 +455,7 @@ in_array($taikhoan['role'], array('admin', 'manager'))) : ?>
 					data: null,
 					orderable: false,
 					searchable : false,
-					defaultContent: '<a class="btn btn-info btn-sm float-right deleteable" href="#"><i class="fas fa-exchange-alt"></i>Chuyển lớp</a>'
+					defaultContent: '<a class="btn btn-info btn-sm float-right editable" href="#"><i class="fas fa-exchange-alt"></i>Chuyển lớp</a>'
 				}
 			],
 			language: {
@@ -176,6 +473,32 @@ in_array($taikhoan['role'], array('admin', 'manager'))) : ?>
 			}
 
 		});
+
+		$('#LopHocTable'+tableindex+' tbody').on( 'click', '.editable', function () {
+		    var data = dataTable.row($(this).parents('tr') ).data();
+		    if(data) {
+				$.ajax({
+					url: '/ajax/quanly/lophoc/getLopHocByPhanLop.php',
+					data: { id: data.phan_lop_hocsinh.id },
+					success: function (data) {
+						$('#maLop').html('');
+						$.each(data, function (index,  row) {
+							$('#maLop').append( '<option value="'+row.maLop+'">'+row.tenLop+'</option>' );
+						});
+					}
+				});
+				// đổ dữ liệu vào form
+				$("#ModalTransferClass input#id").val(data.phan_lop_hocsinh.id);
+				$("#ModalTransferClass").modal({show: true});
+			} else {
+				$(document).Toasts('create', {
+					class: 'bg-danger',
+					title: 'Có lỗi xảy ra!',
+					body: 'Không tìm thấy dữ liệu'
+				});
+			}
+		} );
+
 	}
 
 

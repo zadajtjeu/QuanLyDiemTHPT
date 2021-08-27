@@ -9,8 +9,8 @@ require 'PHPMailer/src/SMTP.php';
 function SendEmailNofication($receive, $subject, $message)
 {
 
-    $GmailAddress = 'mailserverwap@gmail.com';
-    $GmailAccessToken = 'UUVFeE1qTTBOVFkzT0RrPQ==';
+    $GmailAddress = '';
+    $GmailAccessToken = '';
 
     $mail = new PHPMailer();
     $mail->isSMTP();
