@@ -150,11 +150,10 @@ else {
 						</li>
 						<?php if(in_array($taikhoan['role'], array('admin', 'manager', 'teacher'))) : ?>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/quanly/hocsinh.php" class="nav-link">
 								<i class="nav-icon fas fa-user-graduate"></i>
 								<p>
 									Quản lý học sinh
-									<i class="fas fa-angle-left right"></i>
 								</p>
 							</a>
 						</li>
@@ -170,11 +169,10 @@ else {
 						<?php endif; ?>
 						<?php if(in_array($taikhoan['role'], array('admin', 'manager'))) : ?>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/quanly/giaovien.php" class="nav-link">
 								<i class="nav-icon fas fa-user-tie"></i>
 								<p>
 									Quản lý giáo viên
-									<i class="right fas fa-angle-left"></i>
 								</p>
 							</a>
 						</li>
@@ -210,7 +208,7 @@ else {
 							</ul>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/quanly/phanconggv.php" class="nav-link">
 								<i class="nav-icon fas fa-file-contract"></i>
 								<p>
 									Phân công công việc

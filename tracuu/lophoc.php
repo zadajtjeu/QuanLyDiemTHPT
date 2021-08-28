@@ -130,7 +130,12 @@ if (!empty($_GET['maLop'])) {
 			pageLength: 50,
 			'columns': [
 				{ data: 'hocsinh.maHS', searchable : false },
-				{ data: 'hocsinh.tenHS'},
+				{ 
+					data: 'hocsinh.tenHS',
+					fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+						$(nTd).html("<a href='/tracuu/diem.php?maHS="+oData.hocsinh.maHS+"'>"+oData.hocsinh.tenHS+"</a>");
+        			}
+				},
 				{ data: 'hocsinh.ngaySinh'},
 				{ 
 					data: 'hocsinh.gioiTinh',

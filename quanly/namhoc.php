@@ -39,7 +39,7 @@ require './../template/tpl_header.php';
 							<h3 class="card-title">
 								Danh sách năm học
 							</h3>
-							<button type="button" class="btn btn-default btn-sm float-right p-1" onclick="$('#NamHocModalAdd').modal({show: true});"><i class="fas fa-plus-circle"></i> Thêm mới</button>
+							<button type="button" class="btn btn-outline-success bg-light btn-xs btn-flat float-right p-1" onclick="$('#NamHocModalAdd').modal({show: true});"><i class="fas fa-plus-circle"></i> Thêm mới</button>
 						</div>
 						<div class="card-body">
 							<table class="table table-striped projects" id="NamHocTable" width="100%">
@@ -61,7 +61,7 @@ require './../template/tpl_header.php';
 							<h3 class="card-title">
 								Khối lớp
 							</h3>
-							<button type="button" class="btn btn-default btn-sm float-right p-1" onclick="$('#KhoiLopModalAdd').modal({show: true});"><i class="fas fa-plus-circle"></i> Thêm mới</button>
+							<button type="button" class="btn btn-outline-success bg-light btn-xs btn-flat float-right p-1" onclick="$('#KhoiLopModalAdd').modal({show: true});"><i class="fas fa-plus-circle"></i> Thêm mới</button>
 						</div>
 						<div class="card-body">
 							<table class="table table-striped projects" id="KhoiLopTable" width="100%">
@@ -83,7 +83,7 @@ require './../template/tpl_header.php';
 							<h3 class="card-title">
 								Học kỳ
 							</h3>
-							<button type="button" class="btn btn-default btn-sm float-right p-1" onclick="$('#HocKyModalAdd').modal({show: true});"><i class="fas fa-plus-circle"></i> Thêm mới</button>
+							<button type="button" class="btn btn-outline-success bg-light btn-xs btn-flat float-right p-1" onclick="$('#HocKyModalAdd').modal({show: true});"><i class="fas fa-plus-circle"></i> Thêm mới</button>
 						</div>
 						<div class="card-body">
 							<table class="table table-striped projects" id="HocKyTable" width="100%">
@@ -116,7 +116,7 @@ require './../template/tpl_header.php';
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header bg-info">
-				<strong>Chỉnh sửa thông tin </strong></span>
+				<strong>Chỉnh sửa thông tin </strong>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 			</div>
 			<div class="modal-body">
@@ -142,7 +142,7 @@ require './../template/tpl_header.php';
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header bg-info">
-				<strong>Thêm mới </strong></span>
+				<strong>Thêm mới </strong>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 			</div>
 			<div class="modal-body">
@@ -169,7 +169,7 @@ require './../template/tpl_header.php';
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header bg-info">
-				<strong>Chỉnh sửa thông tin </strong></span>
+				<strong>Chỉnh sửa thông tin </strong>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 			</div>
 			<div class="modal-body">
@@ -195,7 +195,7 @@ require './../template/tpl_header.php';
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header bg-info">
-				<strong>Thêm mới </strong></span>
+				<strong>Thêm mới </strong>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 			</div>
 			<div class="modal-body">
@@ -220,7 +220,7 @@ require './../template/tpl_header.php';
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header bg-info">
-				<strong>Chỉnh sửa thông tin </strong></span>
+				<strong>Chỉnh sửa thông tin </strong>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 			</div>
 			<div class="modal-body">
@@ -246,7 +246,7 @@ require './../template/tpl_header.php';
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header bg-info">
-				<strong>Thêm mới </strong></span>
+				<strong>Thêm mới </strong>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 			</div>
 			<div class="modal-body">

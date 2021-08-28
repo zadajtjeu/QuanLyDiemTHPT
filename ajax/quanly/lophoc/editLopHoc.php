@@ -30,21 +30,26 @@ else {
 				if (empty($response['error'])) {
 					$searchMa = $mysqli->query('SELECT * FROM `lop` WHERE `maLop`='.$maLop.';');
 					if ($searchMa->num_rows == 0) {
-						$response['error'][] = 'Môn học không tồn tại!';
+						$response['error'][] = 'Lớp học không tồn tại!';
 					} else {
-						$searchTen = $mysqli->query('SELECT * FROM `lop` WHERE `tenLop`=\''.$tenLop.'\' AND `maNH`='.$maNH.' AND `maKhoiLop`='.$maKhoiLop.' AND `maLop` != '.$maLop.';');
-						if ($searchTen->num_rows > 0) {
-							$response['error'][] = 'Có một lớp cùng học kỳ trùng tên với tên lớp bạn chọn!';
+						$lopinfo = $searchMa->fetch_array(MYSQLI_ASSOC);
+						if ($lopinfo['tenLop'] == $tenLop && $lopinfo['maKhoiLop'] == $maKhoiLop && $lopinfo['maNH'] == $maNH && $lopinfo['maGV'] == $maGV) {
+							$response['error'][] = 'Bạn chưa sửa đổi dữ liệu!';
 						} else {
-							// insert DB
-							$update = $mysqli->query('UPDATE `lop` SET `tenLop` = \''.$tenLop.'\', `maNH` = '.$maNH.', `maKhoiLop` = '.$maKhoiLop.', `maGV` = '.$maGV.' WHERE `maLop` = '.$maLop.';');
-							
-							if ($update) {
-								$response['success'] = 'Cập nhập thông tin môn học thành công.';
-
-								//Gửi email
+							$searchTen = $mysqli->query('SELECT * FROM `lop` WHERE `tenLop`=\''.$tenLop.'\' AND `maNH`='.$maNH.' AND `maKhoiLop`='.$maKhoiLop.' AND `maGV` != '.$maGV.';');
+							if ($searchTen->num_rows > 0) {
+								$response['error'][] = 'Có một lớp cùng học kỳ trùng tên với tên lớp bạn chọn!';
 							} else {
-								$response['error'][] = 'Lỗi cập nhập dữ liệu!';
+								// insert DB
+								$update = $mysqli->query('UPDATE `lop` SET `tenLop` = \''.$tenLop.'\', `maNH` = '.$maNH.', `maKhoiLop` = '.$maKhoiLop.', `maGV` = '.$maGV.' WHERE `maLop` = '.$maLop.';');
+								
+								if ($update) {
+									$response['success'] = 'Cập nhập thông tin môn học thành công.';
+
+									//Gửi email
+								} else {
+									$response['error'][] = 'Lỗi cập nhập dữ liệu!';
+								}
 							}
 						}
 					}

@@ -69,7 +69,7 @@ require './../template/tpl_header.php';
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<strong>Chỉnh sửa thông tin </strong></span>
+				<strong>Chỉnh sửa thông tin </strong>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 			</div>
 			<div class="modal-body">
@@ -98,7 +98,7 @@ require './../template/tpl_header.php';
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<strong>Thêm tài khoản </strong></span>
+				<strong>Thêm tài khoản </strong>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 			</div>
 			<div class="modal-body">

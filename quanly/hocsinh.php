@@ -1,5 +1,5 @@
 <?php
-$title = 'Quản lý lớp học';
+$title = 'Quản lý học sinh';
 require './../template/tpl_header.php';
 
 ?>
@@ -11,6 +11,11 @@ require './../template/tpl_header.php';
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap4.min.css" integrity="sha512-PT0RvABaDhDQugEbpNMwgYBCnGCiTZMh9yOzUsJHDgl/dMhD9yjHAwoumnUk3JydV3QTcIkNDuN40CJxik5+WQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-buttons-bs4/2.0.0/buttons.bootstrap4.min.css" integrity="sha512-hzvGZ3Tzqtdzskup1j2g/yc+vOTahFsuXp6X6E7xEel55qInqFQ6RzR+OzUc5SQ9UjdARmEP0g2LDcXA5x6jVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-responsive-bs4/2.2.5/responsive.bootstrap4.min.css" integrity="sha512-Yy2EzOvLO8+Vs9hwepJPuaRWpwWZ/pamfO4lqi6t9gyQ9DhQ1k3cBRa+UERT/dPzIN/RHZAkraw6Azs4pI0jNg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<!-- Datepicker -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -38,29 +43,35 @@ require './../template/tpl_header.php';
 				<div class="card-header">
 					<h3 class="card-title">
 						<i class="nav-icon fas fa-calendar-alt"></i>
-						Danh sách lớp học
+						Danh sách học sinh
 					</h3>
 					<button type="button" class="btn btn-warning btn-xs float-right" onclick="$('#ModalAdd').modal({show: true});"><i class="fas fa-plus-circle"></i> Thêm mới</button>
 				</div>
 				<div class="card-body">
-					<table class="table table-striped projects" id="LopHocTable" width="100%">
+					<table class="table table-striped projects" id="HocSinhTable" width="100%">
 						<thead>
 							<tr>
-								<th>#</th>
-								<th>Khối</th>
-								<th>Tên lớp</th>
-								<th>Năm học</th>
-								<th>Chủ nhiệm</th>
+								<th>Mã</th>
+								<th>Họ tên học sinh</th>
+								<th>Ngày sinh</th>
+								<th>Giới tính</th>
+								<th>Nơi sinh</th>
+								<th>Diện ưu tiên</th>
+								<th>Dân tộc</th>
+								<th>TP Gia Đình</th>
 								<th></th>
 							</tr>
 						</thead>
 						<tfoot>
 							<tr>
 								<th>#</th>
-								<th>Khối</th>
-								<th>Tên lớp</th>
-								<th>Năm học</th>
-								<th>Chủ nhiệm</th>
+								<th>Họ tên học sinh</th>
+								<th>Ngày sinh</th>
+								<th>Giới tính</th>
+								<th>Nơi sinh</th>
+								<th>Diện ưu tiên</th>
+								<th>Dân tộc</th>
+								<th>TP Gia Đình</th>
 								<th></th>
 							</tr>
 						</tfoot>
@@ -86,10 +97,17 @@ require './../template/tpl_header.php';
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.0.0/js/buttons.html5.min.js" integrity="sha512-33SxAOPhjjpLMmMGKqLwH2QNDmdxf038OFOq+fOI8p8ghCiOvfv3Bs2wqoj50USQkWBLpvy7+CzT5AHTZWGoNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
+<!-- Datepicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/vi.min.js" integrity="sha512-LvYVj/X6QpABcaqJBqgfOkSjuXv81bLz+rpz0BQoEbamtLkUF2xhPNwtI/xrokAuaNEQAMMA1/YhbeykYzNKWg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js" integrity="sha512-k6/Bkb8Fxf/c1Tkyl39yJwcOZ1P4cRrJu77p83zJjN2Z55prbFHxPs9vN7q3l3+tSMGPDdoH51AEU8Vgo1cgAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>s
+
+
 <!-- MODAL CHO Edit -->
 
 <div id="ModalEdit" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel2" aria-hidden="true">
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header bg-info">
 				<strong>Chỉnh sửa thông tin </strong>
@@ -97,38 +115,60 @@ require './../template/tpl_header.php';
 			</div>
 			<div class="modal-body">
 				<form id="EditForm" action="#" method="post">
-					<input type="hidden" name="maLop" id="maLop" value=""/>
+					<input type="hidden" name="maHS" id="maHS" value="" required />
 					<div class="row">
 						<div class="col-sm-6">
 							<!-- text input -->
 							<div class="form-group">
-								<label for="tenLop">Tên lớp</label>
-								<input type="text" class="form-control" id="tenLop" name="tenLop" placeholder="Tên lớp" />
+								<label for="tenHS">Tên học sinh</label>
+								<input type="text" class="form-control" id="tenHS" name="tenHS" placeholder="Tên học sinh" required />
 							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="ngaySinh">Ngày sinh</label>
+								<div class="input-group date" id="ngaySinh" data-target-input="nearest">
+
+									<input type="text" class="form-control datetimepicker-input" id="ngaySinh" name="ngaySinh" data-toggle="datetimepicker" data-target="#ngaySinh" required >
+									<div class="input-group-append" data-target="#ngaySinh" data-toggle="datetimepicker">
+										<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<label for="gioiTinh">Giới tính</label>
+							<select name="gioiTinh" id="gioiTinh" class="form-control" required >
+								<option value="0">Nam</option>
+								<option value="1">Nữ</option>
+							</select>
 						</div>
 						<div class="col-sm-6">
 							<!-- select -->
 							<div class="form-group">
-								<label for="maKhoiLop">Khối lớp</label>
-								<select name="maKhoiLop" id="maKhoiLop" class="form-control">
-								</select>
+								<label for="noiSinh">Nơi sinh</label>
+								<input type="text" class="form-control" id="noiSinh" name="noiSinh" placeholder="nơi sinh" required  />
 							</div>
 						</div>
-					</div>
-					<div class="row">
 						<div class="col-sm-6">
-							<!-- text input -->
 							<div class="form-group">
-								<label for="maNH">Năm học</label>
-								<select name="maNH" id="maNH" class="form-control">
+								<label for="maDUT">Diện ưu tiên</label>
+								<select name="maDUT" id="maDUT" class="form-control">
+									<option value="NULL">Không</option>
 								</select>
 							</div>
 						</div>
 						<div class="col-sm-6">
-							<!-- select -->
 							<div class="form-group">
-								<label for="maGV">Giáo viên chủ nhiệm</label>
-								<select name="maGV" id="maGV" class="form-control">
+								<label for="maDT">Dân tộc</label>
+								<select name="maDT" id="maDT" class="form-control" required />
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="maTPGD">Thành phần gia đình</label>
+								<select name="maTPGD" id="maTPGD" class="form-control" required />
 								</select>
 							</div>
 						</div>
@@ -149,7 +189,7 @@ require './../template/tpl_header.php';
 <!-- MODAL CHO Add -->
 
 <div id="ModalAdd" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel2" aria-hidden="true">
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header bg-info">
 				<strong>Thêm mới </strong>
@@ -161,33 +201,54 @@ require './../template/tpl_header.php';
 						<div class="col-sm-6">
 							<!-- text input -->
 							<div class="form-group">
-								<label for="tenLop">Tên lớp</label>
-								<input type="text" class="form-control"name="tenLop" placeholder="Tên lớp" />
+								<label for="tenHS1">Tên học sinh</label>
+								<input type="text" class="form-control" name="tenHS" id="tenHS1" placeholder="Tên học sinh" required />
 							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="ngaySinh1">Ngày sinh</label>
+								<div class="input-group date" id="ngaySinh1" data-target-input="nearest">
+									<input type="text" class="form-control datetimepicker-input" id="ngaySinh1" name="ngaySinh" data-mask data-toggle="datetimepicker" data-target="#ngaySinh1" required >
+									<div class="input-group-append" data-target="#ngaySinh1" data-toggle="datetimepicker">
+										<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<label for="gioiTinh1">Giới tính</label>
+							<select name="gioiTinh" id="gioiTinh1" class="form-control" required >
+								<option value="0">Nam</option>
+								<option value="1">Nữ</option>
+							</select>
 						</div>
 						<div class="col-sm-6">
 							<!-- select -->
 							<div class="form-group">
-								<label for="maKhoiLop">Khối lớp</label>
-								<select name="maKhoiLop" id="maKhoiLop2" class="form-control">
-								</select>
+								<label for="noiSinh1">Nơi sinh</label>
+								<input type="text" class="form-control" id="noiSinh1" name="noiSinh" placeholder="nơi sinh" required  />
 							</div>
 						</div>
-					</div>
-					<div class="row">
 						<div class="col-sm-6">
-							<!-- text input -->
 							<div class="form-group">
-								<label for="maNH">Năm học</label>
-								<select name="maNH" id="maNH2" class="form-control">
+								<label for="maDUT1">Diện ưu tiên</label>
+								<select name="maDUT" id="maDUT1" class="form-control">
+									<option value="NULL">Không</option>
 								</select>
 							</div>
 						</div>
 						<div class="col-sm-6">
-							<!-- select -->
 							<div class="form-group">
-								<label for="maGV">Giáo viên chủ nhiệm</label>
-								<select name="maGV" id="maGV2" class="form-control">
+								<label for="maDT1">Dân tộc</label>
+								<select name="maDT" id="maDT1" class="form-control" required />
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="maTPGD1">Thành phần gia đình</label>
+								<select name="maTPGD" id="maTPGD1" class="form-control" required />
 								</select>
 							</div>
 						</div>
@@ -205,56 +266,59 @@ require './../template/tpl_header.php';
 	$(document).ready(function(){
 		var classFillData = null;
 		$.ajax({
-			url: '/ajax/quanly/lophoc/getInfo.php',
+			url: '/ajax/quanly/hocsinh/getInfoHS.php',
 			success: function (data) {
 				classFillData = data;
 				
 				// Fill dữ liệu vào select
-				var chiso = 1; // khối
+				var chiso = 0; // DIện ưu tiện
 				$.each(classFillData[chiso], function (index,  row) {
-					$('#maKhoiLop').append( '<option value="'+row.id+'">'+row.value+'</option>' );
-					$('#maKhoiLop2').append( '<option value="'+row.id+'">'+row.value+'</option>' );
+					$('#maDUT').append( '<option value="'+row.id+'">'+row.value+'</option>' );
+					$('#maDUT1').append( '<option value="'+row.id+'">'+row.value+'</option>' );
 				});
-				var chiso = 3; // năm học
+				var chiso = 1; // Dân tộc
 				$.each(classFillData[chiso].reverse(), function (index,  row) {
-					$('#maNH').append( '<option value="'+row.id+'">'+row.value+'</option>' );
-					$('#maNH2').append( '<option value="'+row.id+'">'+row.value+'</option>' );
+					$('#maDT').append( '<option value="'+row.id+'">'+row.value+'</option>' );
+					$('#maDT1').append( '<option value="'+row.id+'">'+row.value+'</option>' );
 				});
-				var chiso = 4; //Chủ nhiệm
+				var chiso = 2; // TP Gia Đình
 				$.each(classFillData[chiso], function (index,  row) {
-					$('#maGV').append( '<option value="'+row.id+'">'+row.value+'</option>' );
-					$('#maGV2').append( '<option value="'+row.id+'">'+row.value+'</option>' );
+					$('#maTPGD').append( '<option value="'+row.id+'">'+row.value+'</option>' );
+					$('#maTPGD1').append( '<option value="'+row.id+'">'+row.value+'</option>' );
 				});
 			}
 		});
 
-		var listDataTable = $('#LopHocTable').DataTable({
+		var listDataTable = $('#HocSinhTable').DataTable({
 			processing: true,
 			serverSide: true,
 			serverMethod: 'post',
 			ajax: {
-				'url':'/ajax/quanly/lophoc/getLopHoc.php'
+				'url':'/ajax/quanly/hocsinh/getListHocSinh.php'
 			},
 			pageLength: 50,
 			'columns': [
-				{ data: 'maLop', searchable : false },
-				{ data: {
-					_:    "khoilop.tenKhoiLop",
-					sort: "khoilop.maKhoiLop"
-				}},
+				{ data: 'maHS', searchable : false },
+				{ data: 'tenHS'},
+				{ data: 'ngaySinh'},
 				{ 
-					data: 'tenLop',
-					fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-           			 $(nTd).html("<a href='/quanly/hocsinhtronglop.php?maLop="+oData.maLop+"'>"+oData.tenLop+"</a>");
-        			}
-    			},
+					data: 'gioiTinh',
+					render: function ( data, type, row ) {
+						return data==0?'Nam':'Nữ';
+			        }
+				},
+				{ data: 'noiSinh'},
 				{ data: {
-					_:    "namhoc.namHoc",
-					sort: "namhoc.maNH"
+					_:    "dienuutien.dienUuTien",
+					sort: "dienuutien.maDUT"
 				}},
 				{ data: {
-					_:    "giaovien.tenGV",
-					sort: "giaovien.maGV"
+					_:    "dantoc.tenDT",
+					sort: "dantoc.maDT"
+				}},
+				{ data: {
+					_:    "thanhphangiadinh.tenTPGD",
+					sort: "thanhphangiadinh.maTPGD"
 				}},
 				{
 					targets: -1,
@@ -264,45 +328,44 @@ require './../template/tpl_header.php';
 					defaultContent: "<a class=\"btn btn-danger btn-sm float-right deleteable\" href=\"#\"><i class=\"fas fa-trash\"></i>Xoá</a> \n <a class=\"btn btn-info btn-sm float-right editable\" href=\"#\"><i class=\"fas fa-pencil-alt\"></i>Sửa</a>"
 				}
 			],
-			order: [[ 3, "desc" ]],
 			language: {
 				url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Vietnamese.json'
 			},
 			dom: "<'row'<'col-sm-12 col-md-8'Bl><'col-sm-12 col-md-4'f>>" +
 				"<'row'<'col-sm-12'tr>>" +
 				"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-        	buttons: [
-        		{
-        			extend: 'copy', 
-        			exportOptions: 
-        			{ columns: ':not(:last-child)', }
-        		}, 
-        		{
-        			extend: 'csv', 
-        			exportOptions: 
-        			{ columns: ':not(:last-child)', }
-        		},
-        		{
-        			extend: 'excel', 
-        			exportOptions: 
-        			{ columns: ':not(:last-child)', }
-        		},
-        		{
-        			extend: 'pdf', 
-        			exportOptions: 
-        			{ columns: ':not(:last-child)', }
-        		},
-        		{
-        			extend: 'print', 
-        			exportOptions: 
-        			{ columns: ':not(:last-child)', }
-        		}
-        	],
+			buttons: [
+				{
+					extend: 'copy', 
+					exportOptions: 
+					{ columns: ':not(:last-child)', }
+				}, 
+				{
+					extend: 'csv', 
+					exportOptions: 
+					{ columns: ':not(:last-child)', }
+				},
+				{
+					extend: 'excel', 
+					exportOptions: 
+					{ columns: ':not(:last-child)', }
+				},
+				{
+					extend: 'pdf', 
+					exportOptions: 
+					{ columns: ':not(:last-child)', }
+				},
+				{
+					extend: 'print', 
+					exportOptions: 
+					{ columns: ':not(:last-child)', }
+				}
+			],
 			initComplete: function () {
 				var footer = this;
-				var i = 0;
+				var i = 0, j = 0;
 				footer.api().columns().every( function () {
-					if (classFillData[i] != null) {
+					if (i == 5 || i == 6 || i == 7) {
 						var column = this;
 						var select = $('<select class="form-control"><option value="">Chưa chọn</option></select>')
 						.appendTo( $(column.footer()).empty() )
@@ -315,14 +378,15 @@ require './../template/tpl_header.php';
 							.search( val ? ''+val+'' : '', true, false )
 							.draw();
 						});
-						$.each(classFillData[i], function (index,  row) {
+						$.each(classFillData[j], function (index,  row) {
 							select.append( '<option value="'+row.value+'">'+row.value+'</option>' )
 						});
+						j++;
 					}
 					i++;
 				});
-				$('#LopHocTable_length').css('display', 'inline-block');
-				$('#LopHocTable_length').css('padding-left', '15px');
+				$('#HocSinhTable_length').css('display', 'inline-block');
+				$('#HocSinhTable_length').css('padding-left', '15px');
 				
 
 			}
@@ -331,16 +395,19 @@ require './../template/tpl_header.php';
 
 
 
-		$('#LopHocTable tbody').on( 'click', '.editable', function () {
+		$('#HocSinhTable tbody').on( 'click', '.editable', function () {
 			var data = listDataTable.row($(this).parents('tr') ).data();
 			if(data) {
 				console.log(data);
 				// đổ dữ liệu vào form
-				$("#ModalEdit input#maLop").val(data.maLop);
-				$("#ModalEdit input#tenLop").val(data.tenLop);
-				$("#ModalEdit select#maKhoiLop").val(data.khoilop.maKhoiLop);
-				$("#ModalEdit select#maNH").val(data.namhoc.maNH);
-				$("#ModalEdit select#maGV").val(data.giaovien.maGV);
+				$("#ModalEdit input#maHS").val(data.maHS);
+				$("#ModalEdit input#tenHS").val(data.tenHS);
+				$("#ModalEdit input#ngaySinh").val(data.ngaySinh);
+				$("#ModalEdit select#gioiTinh").val(data.gioiTinh);
+				$("#ModalEdit input#noiSinh").val(data.noiSinh);
+				$("#ModalEdit select#maDUT").val(data.dienuutien.maDUT);
+				$("#ModalEdit select#maDT").val(data.dantoc.maDT);
+				$("#ModalEdit select#maTPGD").val(data.thanhphangiadinh.maTPGD);
 				$("#ModalEdit").modal({show: true});
 			} else {
 				$(document).Toasts('create', {
@@ -350,13 +417,13 @@ require './../template/tpl_header.php';
 				});
 			}
 		} );
-		$('#LopHocTable tbody').on( 'click', '.deleteable', function () {
+		$('#HocSinhTable tbody').on( 'click', '.deleteable', function () {
 			var data = listDataTable.row($(this).parents('tr') ).data();
 			if (confirm('Bạn có muốn xoá bản ghi này?')) {
 				$.ajax({
-					url: '/ajax/quanly/lophoc/deleteLopHoc.php',
+					url: '/ajax/quanly/hocsinh/deleteHocSinh.php',
 					type: 'POST',
-					data: {maLop: data['maLop']},
+					data: {maHS: data['maHS']},
 					success: function (result) {
 						if (result.success) {
 							$(document).Toasts('create', {
@@ -391,7 +458,7 @@ require './../template/tpl_header.php';
 			var form = $(this);
 			var Data = form.serialize();
 			$.ajax({
-				url: '/ajax/quanly/lophoc/editLopHoc.php',
+				url: '/ajax/quanly/hocsinh/editHocSinh.php',
 				type: 'POST',
 				data: Data,
 				success: function (result) {
@@ -432,7 +499,7 @@ require './../template/tpl_header.php';
 			var form = $(this);
 			var Data = form.serialize();
 			$.ajax({
-				url: '/ajax/quanly/lophoc/addLopHoc.php',
+				url: '/ajax/quanly/hocsinh/addHocSinh.php',
 				type: 'POST',
 				data: Data,
 				success: function (result) {
@@ -464,6 +531,18 @@ require './../template/tpl_header.php';
 			});
 			return false;
 		});
+
+
+				//Date picker
+	    $('#ngaySinh').datetimepicker({
+	        //format: 'L',
+	        format: 'YYYY-MM-DD'
+	    });
+	    $('#ngaySinh1').datetimepicker({
+	        //format: 'L',
+	        format: 'YYYY-MM-DD'
+	    });
+
 
 	});
 
