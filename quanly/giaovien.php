@@ -219,6 +219,7 @@ require './../template/tpl_header.php';
 				'url':'/ajax/quanly/giaovien/getListGiaoVien.php'
 			},
 			pageLength: 50,
+			lengthMenu: [[10, 25, 50, 100,-1], [10, 25, 50, 100, "All"]],
 			'columns': [
 				{ data: 'maGV', searchable : false },
 				{ data: 'tenGV'},

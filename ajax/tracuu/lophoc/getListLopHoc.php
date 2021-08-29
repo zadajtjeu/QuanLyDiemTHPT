@@ -41,6 +41,15 @@ else {
 	            `tenLop` LIKE '%".$searchValue."%' OR `namHoc` LIKE '%".$searchValue."%' OR `tenGV` LIKE '%".$searchValue."%') ";
 	}
 
+	## ColumnSearch
+	foreach ($_POST['columns'] as $column) {
+		if (isset($column['searchable']) && $column['searchable'] && !empty($column['search']['value'])) {
+			$columnSearchTable = is_array($column['data']) ? htmlspecialchars($column['data']['_']) : htmlspecialchars($column['data']);
+			$searchValue = htmlspecialchars($column['search']['value']);
+			$searchValue = str_replace(array('$','^'), '', $searchValue);
+			$searchQuery .= ' AND '.$columnSearchTable.' = \''.$searchValue.'\' ';
+		}
+	}
 	## Total number of records without filtering
 	$sel = $mysqli->query("SELECT count(*) AS `allcount` FROM `lop`");
 	$records = $sel->fetch_array(MYSQLI_ASSOC);

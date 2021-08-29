@@ -220,8 +220,23 @@ else {
 								<i class="nav-icon fas fa-chart-bar"></i>
 								<p>
 									Thống kê
+									<i class="fas fa-angle-left right"></i>
 								</p>
 							</a>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="/thongke/thongkesiso.php" class="nav-link">
+										<i class="fas fa-chevron-right nav-icon"></i>
+										<p>Thống kê sĩ số lớp</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="/thongke/thongkediem.php" class="nav-link">
+										<i class="fas fa-chevron-right nav-icon"></i>
+										<p>Thống kê điểm học sinh</p>
+									</a>
+								</li>
+							</ul>
 						</li>
 						<?php endif; ?>
 						<li class="nav-item">

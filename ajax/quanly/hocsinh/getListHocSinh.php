@@ -30,6 +30,10 @@ else {
 			$draw = empty($_POST['draw']) ? '' : htmlspecialchars($_POST['draw']);  
 			$row = empty($_POST['start']) ? 0 : htmlspecialchars($_POST['start']); 
 			$rowperpage =empty($_POST['length']) ? 10 : htmlspecialchars($_POST['length']);  // Rows display per page
+			// Max select
+			if ($rowperpage == -1) {
+				$rowperpage = 99999999999;
+			}
 
 			##SortOrder 
 			$columnIndex = empty($_POST['order'][0]['column']) ? 0 : htmlspecialchars($_POST['order'][0]['column']); // Column index
