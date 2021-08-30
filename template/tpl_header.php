@@ -158,11 +158,10 @@ else {
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="/quanly/diem.php" class="nav-link">
 								<i class="nav-icon fas fa-file-contract"></i>
 								<p>
 									Quản lý điểm
-									<i class="fas fa-angle-left right"></i>
 								</p>
 							</a>
 						</li>

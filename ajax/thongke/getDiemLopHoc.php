@@ -50,8 +50,12 @@ else {
 						}
 						
 					}
-
-					$diemCN = round(($diem[0] + $diem[1] * 2)/3, 2); // lấy 2 số thập phân
+					if ($diem[0] !== NULL && $diem[1] !== NULL) {
+						$diemCN = round(($diem[0] + $diem[1] * 2)/3, 2); // lấy 2 số thập phân
+					}else {
+						$$diemCN = null;
+					}
+					
 					$Info[] = [
 						'hocsinh' => [
 							'maHS' => $hocsinh['maHS'],
