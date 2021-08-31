@@ -4,7 +4,7 @@ require './../template/tpl_header.php';
 
 ?>
 
-<?php if(in_array($taikhoan['role'], array('admin', 'manager'))) : ?>
+<?php if(in_array($taikhoan['role'], array('admin', 'manager', 'teacher'))) : ?>
 
 
 <style>.toasts-top-right { z-index: 1060!important; }</style>
@@ -368,7 +368,8 @@ require './../template/tpl_header.php';
 				footer.api().columns().every( function () {
 					if (i == 5 || i == 6 || i == 7) {
 						var column = this;
-						var select = $('<select class="form-control"><option value="">Chưa chọn</option></select>')
+						var title = $(column.footer()).text();
+						var select = $('<select class="form-control"><option value="">'+title+'</option></select>')
 						.appendTo( $(column.footer()).empty() )
 						.on( 'change', function () {
 							var val = $.fn.dataTable.util.escapeRegex(

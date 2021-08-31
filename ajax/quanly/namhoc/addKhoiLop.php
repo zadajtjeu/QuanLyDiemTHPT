@@ -23,6 +23,9 @@ else {
 			$taikhoan = $result->fetch_array(MYSQLI_ASSOC);
 			if (in_array($taikhoan['role'], array('admin', 'manager'))) {
 
+				if (strlen($tenKhoiLop) < 2 || strlen($tenKhoiLop) > 50) {
+					$response['error'][] = 'Độ dài tên khối lớp từ 2-50 kí tự!';
+				}
 				if (empty($response['error'])) {
 					$searchMa = $mysqli->query('SELECT * FROM `khoilop` WHERE `tenKhoiLop`=\''.$tenKhoiLop.'\';');
 					if ($searchMa->num_rows > 0) {

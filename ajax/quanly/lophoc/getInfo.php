@@ -20,7 +20,7 @@ if(!empty($_SESSION['username']) && !empty($_SESSION['password'])) {
 
 	if ($result->num_rows > 0) {
 		$taikhoan = $result->fetch_array(MYSQLI_ASSOC);
-		if (in_array($taikhoan['role'], array('admin', 'manager'))) {
+		if (in_array($taikhoan['role'], array('admin', 'manager', 'teacher'))) {
 			$khoilopQuery = $mysqli->query('SELECT `maKhoiLop` AS `id`, `tenKhoiLop` AS `value` FROM `khoilop`;');
 			if ($khoilopQuery->num_rows > 0) {
 				$khoilop = $khoilopQuery->fetch_all(MYSQLI_ASSOC);

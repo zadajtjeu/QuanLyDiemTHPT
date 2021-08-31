@@ -153,7 +153,8 @@ require './../template/tpl_header.php';
 				footer.api().columns().every( function () {
 					if (classFillData[i] != null) {
 						var column = this;
-						var select = $('<select class="form-control"><option value="">Chưa chọn</option></select>')
+						var title = $(column.footer()).text();s
+						var select = $('<select class="form-control"><option value="">'+title+'</option></select>')
 						.appendTo( $(column.footer()).empty() )
 						.on( 'change', function () {
 							var val = $.fn.dataTable.util.escapeRegex(

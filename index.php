@@ -45,7 +45,7 @@ $userCount = $mysqli->query('SELECT COUNT(*) AS `count` FROM `taiKhoan`;')->fetc
 						<div class="icon">
 							<i class="fas fa-book-reader"></i>
 						</div>
-						<a href="#" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+						<a href="/quanly/hocsinh.php" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 				<!-- ./col -->
@@ -60,7 +60,7 @@ $userCount = $mysqli->query('SELECT COUNT(*) AS `count` FROM `taiKhoan`;')->fetc
 						<div class="icon">
 							<i class="fas fa-graduation-cap"></i>
 						</div>
-						<a href="#" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+						<a href="/quanly/giaovien.php" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 				<!-- ./col -->
@@ -75,7 +75,7 @@ $userCount = $mysqli->query('SELECT COUNT(*) AS `count` FROM `taiKhoan`;')->fetc
 						<div class="icon">
 							<i class="fas fa-chalkboard-teacher"></i>
 						</div>
-						<a href="#" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+						<a href="/quanly/lophoc.php" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 				<!-- ./col -->
@@ -90,7 +90,7 @@ $userCount = $mysqli->query('SELECT COUNT(*) AS `count` FROM `taiKhoan`;')->fetc
 						<div class="icon">
 							<i class="fas fa-users"></i>
 						</div>
-						<a href="#" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+						<a href="/system/quanlytaikhoan.php" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 				<!-- ./col -->

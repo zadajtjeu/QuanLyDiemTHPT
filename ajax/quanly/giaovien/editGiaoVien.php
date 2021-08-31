@@ -13,11 +13,11 @@ if((empty($_SESSION['username']) && empty($_SESSION['password']))) {
 }
 else {
 	
-	if (!empty($_POST['maGV']) && !empty($_POST['tenGV']) && !empty($_POST['ngaySinh']) && !empty($_POST['gioiTinh'])  && !empty($_POST['diaChi']) ) {
+	if (!empty($_POST['maGV']) && !empty($_POST['tenGV']) && !empty($_POST['ngaySinh']) && isset($_POST['gioiTinh'])  && !empty($_POST['diaChi']) ) {
 		$maGV = htmlspecialchars($_POST['maGV']);
 		$tenGV = htmlspecialchars($_POST['tenGV']);
 		$ngaySinh = htmlspecialchars($_POST['ngaySinh']);
-		$gioiTinh = (int)$_POST['gioiTinh'] == 1 OR (int)$_POST['gioiTinh'] == 0? htmlspecialchars($_POST['gioiTinh']) : 0;
+		$gioiTinh = (int)$_POST['gioiTinh'] == '0'? 0 : 1;
 		$diaChi = htmlspecialchars($_POST['diaChi']);
 
 		// Xem phân quyền có cho phép sửa không
@@ -30,7 +30,7 @@ else {
 				if (empty($response['error'])) {
 					$searchMa = $mysqli->query('SELECT * FROM `giaovien` WHERE `maGV`='.$maGV.';');
 					if ($searchMa->num_rows == 0) {
-						$response['error'][] = 'Môn học không tồn tại!';
+						$response['error'][] = 'Giáo viên không tồn tại!';
 					} else {
 						$giaovien = $searchMa->fetch_array(MYSQLI_ASSOC);
 						if ($giaovien['tenGV'] == $tenGV && $giaovien['ngaySinh'] == $ngaySinh && $giaovien['gioiTinh'] == $gioiTinh && $giaovien['diaChi'] == $diaChi) {

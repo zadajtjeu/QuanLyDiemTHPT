@@ -13,10 +13,10 @@ if((empty($_SESSION['username']) && empty($_SESSION['password']))) {
 }
 else {
 	
-	if (!empty($_POST['tenHS']) && !empty($_POST['ngaySinh']) && !empty($_POST['gioiTinh']) && !empty($_POST['noiSinh']) && !empty($_POST['maDT']) && !empty($_POST['maTPGD']) ) {
+	if (!empty($_POST['tenHS']) && !empty($_POST['ngaySinh']) && isset($_POST['gioiTinh']) && !empty($_POST['noiSinh']) && !empty($_POST['maDT']) && !empty($_POST['maTPGD']) ) {
 		$tenHS = htmlspecialchars($_POST['tenHS']);
 		$ngaySinh = htmlspecialchars($_POST['ngaySinh']);
-		$gioiTinh = (int)htmlspecialchars($_POST['gioiTinh']);
+		$gioiTinh = (int)$_POST['gioiTinh'] == '0'? 0 : 1;
 		$noiSinh = htmlspecialchars($_POST['noiSinh']);
 		$maDUT = !empty($_POST['maDUT']) ? htmlspecialchars($_POST['maDUT']) : 'NULL';
 		$maDT = (int)htmlspecialchars($_POST['maDT']);

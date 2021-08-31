@@ -24,6 +24,9 @@ else {
 			$taikhoan = $result->fetch_array(MYSQLI_ASSOC);
 			if (in_array($taikhoan['role'], array('admin', 'manager'))) {
 
+				if (strlen($tenHK) < 2 || strlen($tenHK) > 50) {
+					$response['error'][] = 'Độ dài tên học kỳ từ 2-50 kí tự!';
+				}
 				if (empty($response['error'])) {
 					$searchMa = $mysqli->query('SELECT * FROM `hocky` WHERE `maHK`='.$maHK.';');
 					if ($searchMa->num_rows == 0) {

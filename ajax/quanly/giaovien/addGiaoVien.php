@@ -13,10 +13,10 @@ if((empty($_SESSION['username']) && empty($_SESSION['password']))) {
 }
 else {
 	
-	if (!empty($_POST['tenGV']) && !empty($_POST['ngaySinh']) && !empty($_POST['gioiTinh']) && !empty($_POST['diaChi']) ) {
+	if (!empty($_POST['tenGV']) && !empty($_POST['ngaySinh']) && isset($_POST['gioiTinh']) && !empty($_POST['diaChi']) ) {
 		$tenGV = htmlspecialchars($_POST['tenGV']);
 		$ngaySinh = htmlspecialchars($_POST['ngaySinh']);
-		$gioiTinh = (int)$_POST['gioiTinh'] == 1 OR (int)$_POST['gioiTinh'] == 0? htmlspecialchars($_POST['gioiTinh']) : 0;
+		$gioiTinh = (int)$_POST['gioiTinh'] == '0'? 0 : 1;
 		$diaChi = htmlspecialchars($_POST['diaChi']);
 
 		// Xem phân quyền có cho phép sửa không
@@ -28,7 +28,6 @@ else {
 
 				if (empty($response['error'])) {
 					$searchMa = $mysqli->query('SELECT * FROM `giaovien` WHERE `tenGV`= \''.$tenGV.'\' AND `ngaySinh`= \''.$ngaySinh.'\' AND `gioiTinh`= '.$gioiTinh.' AND `diaChi`= \''.$diaChi.'\';');
-
 					if ($searchMa->num_rows > 0) {
 						$response['error'][] = 'Giáo viên đã tồn tại!';
 					} else {

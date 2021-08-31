@@ -13,11 +13,11 @@ if((empty($_SESSION['username']) && empty($_SESSION['password']))) {
 }
 else {
 	
-	if (!empty($_POST['maHS']) && !empty($_POST['tenHS']) && !empty($_POST['ngaySinh']) && !empty($_POST['gioiTinh']) && !empty($_POST['noiSinh']) && !empty($_POST['maDT']) && !empty($_POST['maTPGD']) ) {
+	if (!empty($_POST['maHS']) && !empty($_POST['tenHS']) && !empty($_POST['ngaySinh']) && isset($_POST['gioiTinh']) && !empty($_POST['noiSinh']) && !empty($_POST['maDT']) && !empty($_POST['maTPGD']) ) {
 		$maHS = (int)htmlspecialchars($_POST['maHS']);
 		$tenHS = htmlspecialchars($_POST['tenHS']);
 		$ngaySinh = htmlspecialchars($_POST['ngaySinh']);
-		$gioiTinh = (int)htmlspecialchars($_POST['gioiTinh']);
+		$gioiTinh = (int)$_POST['gioiTinh'] == '0'? 0 : 1;
 		$noiSinh = htmlspecialchars($_POST['noiSinh']);
 		$maDUT = !empty($_POST['maDUT']) ? htmlspecialchars($_POST['maDUT']) : 'NULL';
 		$maDT = (int)htmlspecialchars($_POST['maDT']);
@@ -43,7 +43,7 @@ else {
 							$update = $mysqli->query('UPDATE `hocsinh` SET `tenHS` = \''.$tenHS.'\', `ngaySinh` = \''.$ngaySinh.'\' , `gioiTinh` = '.$gioiTinh.' , `noiSinh` = \''.$noiSinh.'\' , `maDUT` = '.$maDUT.' , `maTPGD` = '.$maTPGD.' , `maDT` = '.$maDT.' WHERE `maHS` = '.$maHS.';');
 								
 							if ($update) {
-								$response['success'] = 'Cập nhập thông tin môn học thành công.';
+								$response['success'] = 'Cập nhập thông tin học sinh thành công.';
 
 								//Gửi email
 							} else {

@@ -25,7 +25,7 @@ else {
 
 	if ($result->num_rows > 0) {
 		$taikhoan = $result->fetch_array(MYSQLI_ASSOC);
-		if (in_array($taikhoan['role'], array('admin', 'manager'))) {
+		if (in_array($taikhoan['role'], array('admin', 'manager', 'teacher'))) {
 
 			$draw = empty($_POST['draw']) ? '' : htmlspecialchars($_POST['draw']);  
 			$row = empty($_POST['start']) ? 0 : htmlspecialchars($_POST['start']); 

@@ -156,7 +156,8 @@ require './../template/tpl_header.php';
 				footer.api().columns().every( function () {
 					var column = this;
 					if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4) {
-						var select = $('<select class="form-control"><option value="">Chưa chọn</option></select>')
+						var title = $(column.footer()).text();
+						var select = $('<select class="form-control"><option value="">'+title+'</option></select>')
 						.appendTo( $(column.footer()).empty() )
 						.on( 'change', function () {
 							var val = $.fn.dataTable.util.escapeRegex(

@@ -26,7 +26,9 @@ else {
 		if ($result->num_rows > 0) {
 			$taikhoan = $result->fetch_array(MYSQLI_ASSOC);
 			if (in_array($taikhoan['role'], array('admin', 'manager'))) {
-
+				if (strlen($tenLop) < 2 || strlen($tenLop) > 50) {
+					$response['error'][] = 'Độ dài tên lớp từ 2-50 kí tự!';
+				}
 				if (empty($response['error'])) {
 					$searchMa = $mysqli->query('SELECT * FROM `lop` WHERE `maLop`='.$maLop.';');
 					if ($searchMa->num_rows == 0) {

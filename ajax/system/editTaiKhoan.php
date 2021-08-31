@@ -27,6 +27,7 @@ else {
 		if ($result->num_rows > 0) {
 			$taikhoan = $result->fetch_array(MYSQLI_ASSOC);
 			if (in_array($taikhoan['role'], array('admin', 'manager'))) {
+
 				if (!in_array($role, array('student', 'teacher', 'manager', 'admin'))) {
 					$response['error'][] = 'Phân quyền không hợp lệ!';
 				}
@@ -35,7 +36,7 @@ else {
 				}
 
 				if (!empty($password)) {
-					if (strlen($password) < 5) {
+					if (strlen($password) < 5 || strlen($password) > 50) {
 						$response['error'][] = 'Độ dài mật khẩu không hợp lệ!';
 					}
 					if ($password != $repassword) {

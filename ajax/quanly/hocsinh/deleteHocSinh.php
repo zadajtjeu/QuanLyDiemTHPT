@@ -23,7 +23,7 @@ else {
 			if (in_array($taikhoan['role'], array('admin', 'manager', 'teacher'))) {
 				$searchUser = $mysqli->query('SELECT * FROM `hocsinh` WHERE `maHS`='.$maHS.';');
 				if ($searchUser->num_rows == 0) {
-					$response['error'] = 'Lớp học không tồn tại!';
+					$response['error'] = 'Học sinh không tồn tại!';
 				} else {
 					$delete = $mysqli->query('DELETE FROM `hocsinh` WHERE `maHS` = '.$maHS.';');
 					

@@ -245,9 +245,9 @@ require './../template/tpl_header.php';
 				{ 
 					data: 'tenLop',
 					fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-           			 $(nTd).html("<a href='/quanly/hocsinhtronglop.php?maLop="+oData.maLop+"'>"+oData.tenLop+"</a>");
-        			}
-    			},
+					 $(nTd).html("<a href='/quanly/hocsinhtronglop.php?maLop="+oData.maLop+"'>"+oData.tenLop+"</a>");
+					}
+				},
 				{ data: {
 					_:    "namhoc.namHoc",
 					sort: "namhoc.maNH"
@@ -265,46 +265,48 @@ require './../template/tpl_header.php';
 				}
 			],
 			order: [[ 3, "desc" ]],
+			orderCellsTop: true,
 			language: {
 				url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Vietnamese.json'
 			},
 			dom: "<'row'<'col-sm-12 col-md-8'Bl><'col-sm-12 col-md-4'f>>" +
 				"<'row'<'col-sm-12'tr>>" +
 				"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-        	buttons: [
-        		{
-        			extend: 'copy', 
-        			exportOptions: 
-        			{ columns: ':not(:last-child)', }
-        		}, 
-        		{
-        			extend: 'csv', 
-        			exportOptions: 
-        			{ columns: ':not(:last-child)', }
-        		},
-        		{
-        			extend: 'excel', 
-        			exportOptions: 
-        			{ columns: ':not(:last-child)', }
-        		},
-        		{
-        			extend: 'pdf', 
-        			exportOptions: 
-        			{ columns: ':not(:last-child)', }
-        		},
-        		{
-        			extend: 'print', 
-        			exportOptions: 
-        			{ columns: ':not(:last-child)', }
-        		}
-        	],
+			buttons: [
+				{
+					extend: 'copy', 
+					exportOptions: 
+					{ columns: ':not(:last-child)', }
+				}, 
+				{
+					extend: 'csv', 
+					exportOptions: 
+					{ columns: ':not(:last-child)', }
+				},
+				{
+					extend: 'excel', 
+					exportOptions: 
+					{ columns: ':not(:last-child)', }
+				},
+				{
+					extend: 'pdf', 
+					exportOptions: 
+					{ columns: ':not(:last-child)', }
+				},
+				{
+					extend: 'print', 
+					exportOptions: 
+					{ columns: ':not(:last-child)', }
+				}
+			],
 			initComplete: function () {
 				var footer = this;
 				var i = 0;
 				footer.api().columns().every( function () {
 					if (classFillData[i] != null) {
 						var column = this;
-						var select = $('<select class="form-control"><option value="">Chưa chọn</option></select>')
+						var title = $(column.footer()).text();
+						var select = $('<select class="form-control"><option value="">'+title+'</option></select>')
 						.appendTo( $(column.footer()).empty() )
 						.on( 'change', function () {
 							var val = $.fn.dataTable.util.escapeRegex(

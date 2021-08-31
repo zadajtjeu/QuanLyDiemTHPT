@@ -38,7 +38,7 @@ else {
 					$response['error'][] = 'Địa chỉ email không hợp lệ!';
 				}
 
-				if (strlen($password) < 5) {
+				if (strlen($password) < 5 || strlen($password) > 50) {
 					$response['error'][] = 'Độ dài mật khẩu không hợp lệ!';
 				}
 				if ($password != $repassword) {

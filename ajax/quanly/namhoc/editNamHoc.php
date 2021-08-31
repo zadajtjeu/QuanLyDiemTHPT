@@ -24,6 +24,9 @@ else {
 			$taikhoan = $result->fetch_array(MYSQLI_ASSOC);
 			if (in_array($taikhoan['role'], array('admin', 'manager'))) {
 
+				if (strlen($namHoc) < 2 || strlen($namHoc) > 50) {
+					$response['error'][] = 'Độ dài tên năm học từ 2-50 kí tự!';
+				}
 				if (empty($response['error'])) {
 					$searchMa = $mysqli->query('SELECT * FROM `namhoc` WHERE `maNH`='.$maNH.';');
 					if ($searchMa->num_rows == 0) {
@@ -37,7 +40,7 @@ else {
 							$update = $mysqli->query('UPDATE `namhoc` SET `namHoc` = \''.$namHoc.'\' WHERE `maNH` = '.$maNH.';');
 							
 							if ($update) {
-								$response['success'] = 'Cập nhập thông tin môn học thành công.';
+								$response['success'] = 'Cập nhập thông tin năm học thành công.';
 
 								//Gửi email
 							} else {
